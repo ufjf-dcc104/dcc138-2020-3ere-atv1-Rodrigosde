@@ -6,7 +6,7 @@
     <title>DCC138 E.xemplo01</title>
 </head>
 <body>
-    <h1>DCC138 E.xemplo01</h1>
+    <h1>DCC138 Exemplo01</h1>
     <canvas></canvas>
     <p>por Rodrigo S. Detoni</p>
     <script>
@@ -27,18 +27,23 @@
             mover: moverElemento,
             controlar : perseguirAlvo
         };  
-        let e = {
-            x :300,
+        const sprites = [];
+        for (let ne= 0; ne< 20; ne++) {
+            let e = {
+            x :canvas.width * Math.random(),
             vx: 0,
             ax: 0 ,
-            y :200,
+            y :canvas.height * Math.random(),
             vy: 0,
             ay: 0,
             cor: "yellow",
             desenhar :desenharElemento,
             mover: moverElemento,
             controlar: perseguirAlvo
-        };
+            };
+            sprites.push(e);
+        }
+       
         const K = 180 ;
         let t0;
         let dt;
@@ -51,16 +56,18 @@
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            //controladores 
-            e.controlar(p);
-            
-            //atualiza dinamica dos estados
-            p.mover();
-            e.mover();
-
-            //desenha elementos
             p.desenhar();
-            e.desenhar();
+            p.mover();
+            for (let s = 0; s < sprites.length; s++) {
+                const sprite = sprites[s];
+                //atualiza dinamica dos estados
+                sprite.mover();
+                //controladores 
+                sprite.controlar(p);
+                //desenha elementos
+                sprite.desenhar();
+            }
+           
 
             requestAnimationFrame(desenha);
             t0 = t;
