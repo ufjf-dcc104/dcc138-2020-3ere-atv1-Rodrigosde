@@ -9,7 +9,6 @@
     <h1>DCC138 Exemplo01</h1>
     <canvas></canvas>
     <p>por Rodrigo S. Detoni</p>
-
     <script>
         let canvas = document.querySelector("canvas");
         let ctx = canvas.getContext("2d");
@@ -20,6 +19,7 @@
         let vx = 0;
         let y = 100;
         let vy = 0;
+        const V = 180 ;
         let t0;
         let dt;
         requestAnimationFrame(desenha);
@@ -29,14 +29,14 @@
             dt = (t - t0) / 1000;
             //desenha fundo
             ctx.fillStyle = "black";
-            ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             //atualiza dinamica dos estados
-            x = x + vx*dt ; 
-            y = y + vy*dt ;
+            x = x + vx * dt ; 
+            y = y + vy * dt ;
 
             //desenha elementos
             ctx.fillStyle = "white";
-            ctx.fillRect(x,y,20,20);
+            ctx.fillRect(x, y, 20, 20);
 
             requestAnimationFrame(desenha);
             t0 = t;
@@ -49,16 +49,16 @@
            console.log(e.key);
             switch(e.key){
                 case "ArrowUp": 
-                    vy = -20;
+                    vy = -V;
                     break;
                 case "ArrowDow": 
-                    vy = +20;
+                    vy = +V;
                     break;
                 case "ArrowLeft": 
-                    vx = -20;
+                    vx = -V;
                     break;
                 case "ArrowRight": 
-                    vx = +20;
+                    vx = +V;
                     break;
             }
        }
