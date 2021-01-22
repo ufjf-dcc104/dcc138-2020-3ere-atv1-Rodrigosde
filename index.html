@@ -35,7 +35,7 @@
         requestAnimationFrame(desenha);
        
         function desenha(t){
-            t0 == t0 ?? t;
+            t0 = t0 ?? t;
             dt = (t - t0) / 1000;
             //desenha fundo
             ctx.fillStyle = "black";
@@ -76,7 +76,7 @@
                 case "ArrowUp": 
                     ay = -K;
                     break;
-                case "ArrowDow": 
+                case "ArrowDown": 
                     ay = +K;
                     break;
                 case "ArrowLeft": 
@@ -93,9 +93,9 @@
             switch(e.key){
                 case "ArrowUp": 
                     vy = 0;
-                   
+                    ay = 0;
                     break;
-                case "ArrowDow": 
+                case "ArrowDown": 
                     vy = 0;
                     ay = 0;
                     break;
