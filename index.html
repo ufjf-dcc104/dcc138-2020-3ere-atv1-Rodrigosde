@@ -43,7 +43,27 @@
             };
             sprites.push(e);
         }
-       
+
+        let o = {
+            x : -1000,
+            vx: 0,
+            ax: 0 ,
+            y : 150,
+            vy: 0,
+            ay: 0,
+            cor: "blue",
+            desenhar : desenharElemento,
+            mover: moverElemento,
+            controlar: function () {
+                if(this.x>canvas.width + 60){
+                    this.x = -1000;
+                    this.ax = 0;
+                    this.vx = 0;
+                }
+            }
+        };  
+       sprites.push(o);
+
         const K = 180 ;
         let t0;
         let dt;
@@ -61,9 +81,9 @@
             for (let s = 0; s < sprites.length; s++) {
                 const sprite = sprites[s];
                 //atualiza dinamica dos estados
-                sprite.mover();
+                sprite.mover?.();
                 //controladores 
-                sprite.controlar(p);
+                sprite.controlar?.(p);
                 //desenha elementos
                 sprite.desenhar();
             }
@@ -128,6 +148,15 @@
                     break;
                 case "ArrowRight": 
                     p.ax = 0;
+                    break;
+                case " ": 
+                if (o.x === -1000) {
+                    o.x = p.x;
+                    o.y = p.y;
+                    o.vx = 200;
+                    o.ax = 100;
+                }
+                   
                     break;
             }
        }
