@@ -25,7 +25,7 @@
             cor: "white",
             desenhar : desenharElemento,
             mover: moverElemento,
-            controlar : perseguirAlvo
+            
         };  
         const sprites = [];
         for (let ne= 0; ne< 20; ne++) {
@@ -79,13 +79,28 @@
             p.desenhar();
             p.mover();
             for (let s = 0; s < sprites.length; s++) {
-                const sprite = sprites[s];
-                //atualiza dinamica dos estados
-                sprite.mover?.();
+                const sprite = sprites[s];   
                 //controladores 
                 sprite.controlar?.(p);
+                //atualiza dinamica dos estados
+                sprite.mover?.();
                 //desenha elementos
                 sprite.desenhar();
+
+                if (colidiram(o,sprite)&& o !== sprite) {
+                    o.x = -1000;
+                    o.y = -1000;
+                    o.vx = 0;
+                    o.ax = 0;
+                    sprite.x = 1000;
+                    sprite.vx = 100;
+                    sprite.ax = 0;
+                }
+                if (colidiram(p,sprite)&&(o !== sprite)) {
+                    sprite.x = 1000;
+                    sprite.vx = 100;
+                    sprite.ax = 0;
+                }
             }
            
 
@@ -160,7 +175,14 @@
                     break;
             }
        }
-
+       function colidiram(A, B) {
+            return !(
+               (A.x > B.x + 20)
+               ||(A.x +20 < B.x)
+               || (A.y > B.y + 20)
+               ||(A.y +20 < B.y)
+            )
+       }
     </script>
 </body>
 </html>
