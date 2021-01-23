@@ -15,6 +15,7 @@
         //tamanho do canvas
         canvas.width = 480;
         canvas.height = 320;
+        let pontos = 0;
         let p = {
             x : 150,
             vx: 0,
@@ -95,13 +96,18 @@
                     sprite.x = 1000;
                     sprite.vx = 100;
                     sprite.ax = 0;
+                    pontos++;
                 }
                 if (colidiram(p,sprite)&&(o !== sprite)) {
                     sprite.x = 1000;
                     sprite.vx = 100;
                     sprite.ax = 0;
+                    pontos -=3;
                 }
             }
+            ctx.fillStyle = "White";
+            ctx.font = "20px Impact"
+            ctx.fillText(pontos,10,30);
            
 
             requestAnimationFrame(desenha);
@@ -132,7 +138,7 @@
 
        function teclaPressionada(event){
            //adiciona controle de velocidades
-           console.log(event.key);
+           
             switch(event.key){
                 case "ArrowUp": 
                     p.ay = -K;
@@ -150,7 +156,7 @@
        }
        function teclaSolta(event){
            //adiciona controle de velocidades
-           console.log(event.key);
+           
             switch(event.key){
                 case "ArrowUp": 
                     p.ay = 0;
